@@ -7,7 +7,9 @@ import MusicLibraryStore from "./musicLibrary.store.js";
 import MusicLibraryView from "./musicLibrary.view.js";
 
 const localStorageItem = localStorage.getItem("musicLibrary");
-let initialState = {};
+let initialState = {
+    albums: [{ title: "Americana", rating: "7" }]
+};
 
 try {
     if (localStorageItem) {
