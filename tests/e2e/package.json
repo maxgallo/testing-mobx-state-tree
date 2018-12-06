@@ -6,18 +6,9 @@
     "author": "massimiliano.gallo@gmail.com",
     "license": "MIT",
     "devDependencies": {
-        "jest": "^23.6.0",
-        "jest-puppeteer": "^3.5.2",
-        "puppeteer": "^1.11.0"
+        "testcafe": "^0.23.2"
     },
     "scripts": {
-        "test": "HEADLESS=false jest"
-    },
-    "jest": {
-        "preset": "jest-puppeteer",
-        "testMatch": [
-            "**/endToEnd.js"
-        ],
-        "transform": {}
+        "test": "testcafe chrome endToEnd.js --skip-js-errors"
     }
 }

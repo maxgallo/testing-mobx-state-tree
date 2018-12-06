@@ -1,22 +1,31 @@
-const puppeteer = require('puppeteer');
+import { Selector, ClientFunction } from 'testcafe';
 const codesandboxUrl = 'https://7mzkrkym4q.codesandbox.io/';
 
+const localStorageSet = ClientFunction((key, val) => localStorage.setItem(key, val));
 
-describe('Google', () => {
-    beforeAll(async () => {
-        await page.goto(codesandboxUrl)
-    })
+fixture('Testing MobX State Tree')
+    .page(codesandboxUrl)
 
-    it('should display default Album', async () => {
-        await expect(page).toMatch('Americana');
-    })
+test('should display default Album', async t => {
+    await t.expect(Selector('li').textContent).eql('Americana | Rating: 7');
+})
 
-    it('should add albums', async () => {
-        page.on('dialog', async dialog => {
-            await dialog.accept('Californication');
-            await expect(page).toMatch('Californication');
-        });
-        await page.waitFor('button');
-        await page.click('button')
-    })
+test('should open a dialog and add Album', async t => {
+    await t
+        .setNativeDialogHandler(() => 'Californication')
+        .click('button');
+
+    await t.expect(Selector('li').withText('Californication').exists).ok();
+})
+
+test('should read localStorage initialState', async t => {
+    let initialState = {
+        albums: [{ title: "S&M", rating: 8 }]
+    };
+
+    await localStorageSet('musicLibrary', JSON.stringify(initialState));
+
+    await t.navigateTo(codesandboxUrl);
+
+    await t.expect(Selector('li').textContent).contains('S&M');
 })
