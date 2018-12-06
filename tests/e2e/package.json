@@ -1,0 +1,23 @@
+{
+    "name": "e2e",
+    "version": "1.0.0",
+    "description": "End to end tests for MobX State Tree",
+    "main": "index.js",
+    "author": "massimiliano.gallo@gmail.com",
+    "license": "MIT",
+    "devDependencies": {
+        "jest": "^23.6.0",
+        "jest-puppeteer": "^3.5.2",
+        "puppeteer": "^1.11.0"
+    },
+    "scripts": {
+        "test": "HEADLESS=false jest"
+    },
+    "jest": {
+        "preset": "jest-puppeteer",
+        "testMatch": [
+            "**/endToEnd.js"
+        ],
+        "transform": {}
+    }
+}
