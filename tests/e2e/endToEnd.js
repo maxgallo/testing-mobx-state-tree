@@ -1,5 +1,5 @@
 import { Selector, ClientFunction } from 'testcafe';
-const codesandboxUrl = 'https://7mzkrkym4q.codesandbox.io/';
+const codesandboxUrl = 'https://00n9nlnk5l.codesandbox.io/';
 
 const localStorageSet = ClientFunction((key, val) => localStorage.setItem(key, val));
 
